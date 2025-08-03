@@ -25,6 +25,19 @@ spring:
   
   cache:
     type: simple
+  
+  mail:
+    host: localhost
+    port: 587
+    username: noreply@themelyf.com
+    password: password
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+        debug: false
 
 server:
   port: 8080
