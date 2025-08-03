@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/base :: layout(~{::title}, ~{::content}, ~{::scripts})">
+<head>
+    <title>UI Components Demo - Themelyf</title>
+</head>
+<body>
+    <div th:fragment="content" class="px-4 py-6 sm:px-0">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">UI Components Demo</h1>
+            <p class="text-gray-600">Comprehensive examples of advanced UI components with modern JavaScript libraries.</p>
+        </div>
+
+        <!-- Component Categories -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+            
+            <!-- Modal Components -->
+            <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                <h2 class="text-xl font-semibold mb-4 text-gray-900 flex items-center">
+                    <div class="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-window-maximize text-primary-600"></i>
+                    </div>
+                    Modal Components
+                </h2>
+                
+                <div class="space-y-3">
+                    <button onclick="showBasicModal()" 
+                            class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Basic Modal
+                    </button>
+                    
+                    <button onclick="showFormModal()" 
+                            class="w-full bg-success-600 hover:bg-success-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Advanced Form Modal
+                    </button>
+                    
+                    <button onclick="showImageGalleryModal()" 
+                            class="w-full bg-warning-600 hover:bg-warning-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Image Gallery Modal
+                    </button>
+                    
+                    <button onclick="showDataTableModal()" 
+                            class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Data Table Modal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notification Components -->
+            <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                <h2 class="text-xl font-semibold mb-4 text-gray-900 flex items-center">
+                    <div class="w-8 h-8 bg-success-100 rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-bell text-success-600"></i>
+                    </div>
+                    Notifications
+                </h2>
+                
+                <div class="space-y-3">
+                    <button onclick="showSuccessNotification()" 
+                            class="w-full bg-success-600 hover:bg-success-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Success Notification
+                    </button>
+                    
+                    <button onclick="showErrorNotification()" 
+                            class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Error Notification
+                    </button>
+                    
+                    <button onclick="showWarningNotification()" 
+                            class="w-full bg-warning-600 hover:bg-warning-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Warning Notification
+                    </button>
+                    
+                    <button onclick="showInteractiveNotification()" 
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Interactive Notification
+                    </button>
+                </div>
+            </div>
+
+            <!-- Form Components -->
+            <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                <h2 class="text-xl font-semibold mb-4 text-gray-900 flex items-center">
+                    <div class="w-8 h-8 bg-warning-100 rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-forms text-warning-600"></i>
+                    </div>
+                    Advanced Form Inputs
+                </h2>
+                
+                <div class="space-y-4">
+                    <!-- Date Picker -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Date Picker</label>
+                        <input type="text" 
+                               data-datepicker='{"format": "Y-m-d", "showTime": false}'
+                               placeholder="Select date..."
+                               class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500">
+                    </div>
+                    
+                    <!-- Multi-Select -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Multi-Select</label>
+                        <select data-multiselect='{"placeholder": "Choose options...", "searchable": true}' multiple>
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                            <option value="option3">Option 3</option>
+                            <option value="option4">Option 4</option>
+                        </select>
+                    </div>
+                    
+                    <!-- File Upload -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">File Upload</label>
+                        <input type="file" 
+                               data-file-upload='{"multiple": true, "accept": "image/*", "maxSize": 5242880, "preview": true}'
+                               class="hidden">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Components -->
+            <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                <h2 class="text-xl font-semibold mb-4 text-gray-900 flex items-center">
+                    <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-mouse-pointer text-blue-600"></i>
+                    </div>
+                    Interactive Elements
+                </h2>
+                
+                <div class="space-y-3">
+                    <button onclick="showTooltipExample(this)" 
+                            data-tooltip="This is a custom tooltip with rich content!"
+                            class="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Hover for Tooltip
+                    </button>
+                    
+                    <button onclick="showPopoverExample(this)" 
+                            class="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Click for Popover
+                    </button>
+                    
+                    <button onclick="showContextMenuExample(event)" 
+                            class="w-full bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Right-click Context Menu
+                    </button>
+                    
+                    <div class="relative">
+                        <button onclick="uiComponents.toggleDropdown(this)" 
+                                data-dropdown="#demo-dropdown"
+                                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-between">
+                            Dropdown Menu
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div id="demo-dropdown" 
+                             class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg">
+                            <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded-t-lg">Action 1</button>
+                            <button class="block w-full text-left px-4 py-2 hover:bg-gray-100">Action 2</button>
+                            <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 rounded-b-lg">Action 3</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading States -->
+            <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                <h2 class="text-xl font-semibold mb-4 text-gray-900 flex items-center">
+                    <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-spinner text-purple-600"></i>
+                    </div>
+                    Loading States
+                </h2>
+                
+                <div class="space-y-3">
+                    <button onclick="showLoadingSpinner()" 
+                            class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Loading Spinner
+                    </button>
+                    
+                    <button onclick="showProgressBar()" 
+                            class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Progress Bar Demo
+                    </button>
+                    
+                    <button onclick="showSkeletonLoader()" 
+                            class="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
+                        Skeleton Loading
+                    </button>
+                    
+                    <div id="progress-demo" class="mt-4">
+                        <!-- Progress bar will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Form Inputs -->
+            <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                <h2 class="text-xl font-semibold mb-4 text-gray-900 flex items-center">
+                    <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                        <i class="fas fa-sliders-h text-green-600"></i>
+                    </div>
+                    Form Controls
+                </h2>
+                
+                <div class="space-y-4">
+                    <!-- Color Picker -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Color Picker</label>
+                        <input type="color" 
+                               data-colorpicker='{"format": "hex", "alpha": false}'
+                               value="#3B82F6"
+                               class="w-full h-10 border-gray-300 rounded-lg">
+                    </div>
+                    
+                    <!-- Range Slider -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Range Slider</label>
+                        <input type="range" 
+                               data-range-slider='{"showValue": true, "showLabels": true}'
+                               min="0" 
+                               max="100" 
+                               value="50"
+                               class="w-full">
+                    </div>
+                    
+                    <!-- Rich Text Editor -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Rich Text Editor</label>
+                        <textarea data-rich-editor='{"toolbar": ["bold", "italic", "underline", "link", "list"], "height": "120px"}'
+                                  class="w-full border-gray-300 rounded-lg">
+                            Start typing here...
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Examples Section -->
+        <div class="mt-12">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Advanced Examples</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Data Visualization -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4 text-gray-900">Chart Example</h3>
+                    <canvas id="demo-chart" width="400" height="200"></canvas>
+                    <div class="mt-4 flex space-x-2">
+                        <button onclick="updateChart('bar')" class="bg-primary-600 text-white px-3 py-1 rounded text-sm">Bar</button>
+                        <button onclick="updateChart('line')" class="bg-success-600 text-white px-3 py-1 rounded text-sm">Line</button>
+                        <button onclick="updateChart('pie')" class="bg-warning-600 text-white px-3 py-1 rounded text-sm">Pie</button>
+                    </div>
+                </div>
+                
+                <!-- Sortable List -->
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-lg font-semibold mb-4 text-gray-900">Sortable List</h3>
+                    <ul id="sortable-list" class="space-y-2">
+                        <li class="bg-gray-50 p-3 rounded-lg cursor-move flex items-center">
+                            <i class="fas fa-grip-vertical text-gray-400 mr-3"></i>
+                            <span>Draggable Item 1</span>
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg cursor-move flex items-center">
+                            <i class="fas fa-grip-vertical text-gray-400 mr-3"></i>
+                            <span>Draggable Item 2</span>
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg cursor-move flex items-center">
+                            <i class="fas fa-grip-vertical text-gray-400 mr-3"></i>
+                            <span>Draggable Item 3</span>
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg cursor-move flex items-center">
+                            <i class="fas fa-grip-vertical text-gray-400 mr-3"></i>
+                            <span>Draggable Item 4</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Validation Example -->
+        <div class="mt-8 bg-white p-6 rounded-xl shadow-lg">
+            <h3 class="text-lg font-semibold mb-4 text-gray-900">Advanced Form Validation</h3>
+            <form data-validate-form class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                    <input type="text" 
+                           data-validate="required|minLength:2|maxLength:50"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                           placeholder="Enter your full name">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                    <input type="email" 
+                           data-validate="required|email"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                           placeholder="your.email@example.com">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                    <input type="tel" 
+                           data-validate="phone"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                           placeholder="+1 (555) 123-4567">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Website URL</label>
+                    <input type="url" 
+                           data-validate="url"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                           placeholder="https://example.com">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Age</label>
+                    <input type="number" 
+                           data-validate="number|min:18|max:120"
+                           data-min="18"
+                           data-max="120"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                           placeholder="Enter your age">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Password *</label>
+                    <input type="password" 
+                           id="password"
+                           data-validate="required|minLength:8"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                           placeholder="Minimum 8 characters">
+                </div>
+                
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Confirm Password *</label>
+                    <input type="password" 
+                           data-validate="required|match:#password"
+                           data-match="#password"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500"
+                           placeholder="Confirm your password">
+                </div>
+                
+                <div class="md:col-span-2 flex justify-end space-x-3">
+                    <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-6 rounded-lg transition-colors duration-200">
+                        Reset
+                    </button>
+                    <button type="submit" class="bg-primary-600 hover:bg-primary-700 text-white font-bold py-2 px-6 rounded-lg transition-colors duration-200">
+                        Validate & Submit
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:fragment="scripts">
+        <script>
+            // Component demo functions
+            let demoChart;
+            
+            function showBasicModal() {
+                modalManager.createModal({
+                    id: 'basic-demo-modal',
+                    title: 'Basic Modal Example',
+                    content: `
+                        <div class="text-center py-4">
+                            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-primary-100 mb-4">
+                                <i class="fas fa-info text-primary-600 text-xl"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-gray-900 mb-2">Modal Information</h3>
+                            <p class="text-gray-600">This is a basic modal dialog that can display any content you need. It includes smooth animations and keyboard support.</p>
+                        </div>
+                    `,
+                    actions: [
+                        {
+                            label: 'Close',
+                            onclick: "modalManager.closeModal('basic-demo-modal')",
+                            class: 'bg-gray-300 hover:bg-gray-400 text-gray-800'
+                        },
+                        {
+                            label: 'Got it!',
+                            onclick: "modalManager.closeModal('basic-demo-modal')",
+                            class: 'bg-primary-600 hover:bg-primary-700 text-white'
+                        }
+                    ]
+                });
+                modalManager.openModal('basic-demo-modal');
+            }
+            
+            function showFormModal() {
+                modalManager.createModal({
+                    id: 'form-demo-modal',
+                    title: 'Advanced Form Modal',
+                    size: 'large',
+                    content: `
+                        <form data-validate-form class="space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                                    <input type="text" data-validate="required|minLength:2" class="w-full border-gray-300 rounded-lg">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                                    <input type="text" data-validate="required|minLength:2" class="w-full border-gray-300 rounded-lg">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" data-validate="required|email" class="w-full border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+                                <input type="text" data-datepicker='{"format": "Y-m-d"}' class="w-full border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Interests</label>
+                                <select data-multiselect='{"placeholder": "Choose your interests..."}' multiple class="w-full">
+                                    <option value="tech">Technology</option>
+                                    <option value="sports">Sports</option>
+                                    <option value="music">Music</option>
+                                    <option value="travel">Travel</option>
+                                    <option value="cooking">Cooking</option>
+                                </select>
+                            </div>
+                        </form>
+                    `,
+                    actions: [
+                        {
+                            label: 'Cancel',
+                            onclick: "modalManager.closeModal('form-demo-modal')",
+                            class: 'bg-gray-300 hover:bg-gray-400 text-gray-800'
+                        },
+                        {
+                            label: 'Save',
+                            onclick: "saveFormData(); modalManager.closeModal('form-demo-modal')",
+                            class: 'bg-success-600 hover:bg-success-700 text-white'
+                        }
+                    ]
+                });
+                modalManager.openModal('form-demo-modal');
+                
+                // Re-initialize form components after modal opens
+                setTimeout(() => {
+                    advancedFormInputs.initializeAllComponents();
+                }, 100);
+            }
+            
+            function showImageGalleryModal() {
+                modalManager.createModal({
+                    id: 'gallery-demo-modal',
+                    title: 'Image Gallery',
+                    size: 'large',
+                    content: `
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="aspect-square bg-gradient-to-br from-primary-400 to-primary-600 rounded-lg flex items-center justify-center text-white">
+                                <i class="fas fa-image text-3xl"></i>
+                            </div>
+                            <div class="aspect-square bg-gradient-to-br from-success-400 to-success-600 rounded-lg flex items-center justify-center text-white">
+                                <i class="fas fa-image text-3xl"></i>
+                            </div>
+                            <div class="aspect-square bg-gradient-to-br from-warning-400 to-warning-600 rounded-lg flex items-center justify-center text-white">
+                                <i class="fas fa-image text-3xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-center text-gray-600 mt-4">Click on any image to view in full screen</p>
+                    `
+                });
+                modalManager.openModal('gallery-demo-modal');
+            }
+            
+            function showDataTableModal() {
+                modalManager.createModal({
+                    id: 'table-demo-modal',
+                    title: 'Data Table Example',
+                    size: 'large',
+                    content: `
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">John Doe</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">john@example.com</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Active</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-2">Edit</button>
+                                            <button class="text-red-600 hover:text-red-900">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <!-- More rows... -->
+                                </tbody>
+                            </table>
+                        </div>
+                    `
+                });
+                modalManager.openModal('table-demo-modal');
+            }
+            
+            function showSuccessNotification() {
+                if (window.notyf) {
+                    window.notyf.success('Operation completed successfully!');
+                } else {
+                    notificationManager.success('Success!', 'Operation completed successfully!');
+                }
+            }
+            
+            function showErrorNotification() {
+                if (window.notyf) {
+                    window.notyf.error('Something went wrong. Please try again.');
+                } else {
+                    notificationManager.error('Error!', 'Something went wrong. Please try again.');
+                }
+            }
+            
+            function showWarningNotification() {
+                notificationManager.warning('Warning!', 'Please check your input and try again.');
+            }
+            
+            function showInteractiveNotification() {
+                notificationManager.show('info', 'Interactive Notification', 'This notification has action buttons.', {
+                    persistent: true,
+                    actions: [
+                        {
+                            label: 'View Details',
+                            onclick: 'showBasicModal()',
+                            class: 'text-primary-600 hover:text-primary-800'
+                        },
+                        {
+                            label: 'Dismiss',
+                            onclick: 'notificationManager.clear()',
+                            class: 'text-gray-600 hover:text-gray-800'
+                        }
+                    ]
+                });
+            }
+            
+            function showPopoverExample(button) {
+                uiComponents.showPopover(button, `
+                    <h4 class="font-semibold mb-2">Rich Popover Content</h4>
+                    <p class="text-sm mb-3">This popover can contain any HTML content including:</p>
+                    <ul class="text-sm space-y-1 mb-3">
+                        <li>• Lists and formatted text</li>
+                        <li>• <strong>Bold</strong> and <em>italic</em> styles</li>
+                        <li>• <a href="#" class="text-primary-600">Links</a></li>
+                    </ul>
+                    <button onclick="uiComponents.closePopover(this.closest('[data-popover-target]')?.previousElementSibling || document.querySelector('[data-popover]'))" 
+                            class="bg-primary-600 text-white px-3 py-1 rounded text-sm">
+                        Got it!
+                    </button>
+                `, {
+                    title: 'Interactive Popover',
+                    width: '300px',
+                    position: 'bottom'
+                });
+            }
+            
+            function showContextMenuExample(event) {
+                event.preventDefault();
+                // Custom context menu implementation
+                const existingMenu = document.querySelector('.context-menu');
+                if (existingMenu) existingMenu.remove();
+                
+                const menu = document.createElement('div');
+                menu.className = 'context-menu fixed z-50 bg-white border border-gray-300 rounded-lg shadow-lg py-1';
+                menu.innerHTML = `
+                    <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">Copy</button>
+                    <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">Edit</button>
+                    <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm">Share</button>
+                    <hr class="my-1">
+                    <button class="block w-full text-left px-4 py-2 hover:bg-gray-100 text-sm text-red-600">Delete</button>
+                `;
+                
+                menu.style.left = event.pageX + 'px';
+                menu.style.top = event.pageY + 'px';
+                
+                document.body.appendChild(menu);
+                
+                document.addEventListener('click', function handler() {
+                    menu.remove();
+                    document.removeEventListener('click', handler);
+                });
+            }
+            
+            function showLoadingSpinner() {
+                modalManager.createModal({
+                    id: 'loading-demo-modal',
+                    content: `
+                        <div class="text-center py-8">
+                            <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-primary-600 mx-auto mb-4"></div>
+                            <p class="text-gray-600">Loading... Please wait</p>
+                        </div>
+                    `,
+                    closable: false,
+                    size: 'small'
+                });
+                modalManager.openModal('loading-demo-modal');
+                
+                setTimeout(() => {
+                    modalManager.closeModal('loading-demo-modal');
+                    showSuccessNotification();
+                }, 3000);
+            }
+            
+            function showProgressBar() {
+                const container = document.getElementById('progress-demo');
+                uiComponents.createProgressBar(container, {
+                    value: 0,
+                    max: 100,
+                    showPercentage: true,
+                    animated: true
+                });
+                
+                const progressBar = container.querySelector('.progress-bar');
+                let progress = 0;
+                
+                const interval = setInterval(() => {
+                    progress += Math.random() * 15;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            showSuccessNotification();
+                        }, 500);
+                    }
+                    uiComponents.updateProgress(progressBar, progress);
+                }, 200);
+            }
+            
+            function showSkeletonLoader() {
+                modalManager.createModal({
+                    id: 'skeleton-demo-modal',
+                    title: 'Loading Content...',
+                    content: `<div id="skeleton-content"></div>`,
+                    size: 'medium'
+                });
+                modalManager.openModal('skeleton-demo-modal');
+                
+                const container = document.getElementById('skeleton-content');
+                uiComponents.createSkeletonLoader(container, {
+                    lines: 4,
+                    avatar: true
+                });
+                
+                setTimeout(() => {
+                    container.innerHTML = `
+                        <div class="flex items-center space-x-4 mb-4">
+                            <img src="https://via.placeholder.com/40" alt="Avatar" class="w-10 h-10 rounded-full">
+                            <div>
+                                <h4 class="font-semibold">John Doe</h4>
+                                <p class="text-sm text-gray-500">Software Developer</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">This content was loaded after the skeleton animation. Skeleton loaders provide a better user experience by showing the structure of content before it loads.</p>
+                    `;
+                }, 2000);
+            }
+            
+            function saveFormData() {
+                showSuccessNotification();
+            }
+            
+            // Chart functionality
+            function initChart() {
+                const ctx = document.getElementById('demo-chart').getContext('2d');
+                demoChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Sales',
+                            data: [12, 19, 3, 5, 2, 3],
+                            backgroundColor: [
+                                'rgba(59, 130, 246, 0.6)',
+                                'rgba(16, 185, 129, 0.6)',
+                                'rgba(245, 158, 11, 0.6)',
+                                'rgba(239, 68, 68, 0.6)',
+                                'rgba(139, 92, 246, 0.6)',
+                                'rgba(236, 72, 153, 0.6)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                });
+            }
+            
+            function updateChart(type) {
+                if (demoChart) {
+                    demoChart.config.type = type;
+                    demoChart.update();
+                }
+            }
+            
+            // Initialize everything when DOM is loaded
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize Chart.js
+                if (typeof Chart !== 'undefined') {
+                    initChart();
+                }
+                
+                // Initialize Sortable.js
+                if (typeof Sortable !== 'undefined') {
+                    new Sortable(document.getElementById('sortable-list'), {
+                        animation: 150,
+                        ghostClass: 'opacity-50'
+                    });
+                }
+                
+                // Setup tooltips for interactive elements
+                document.querySelectorAll('[data-tooltip]').forEach(element => {
+                    element.addEventListener('mouseenter', function() {
+                        const content = this.getAttribute('data-tooltip');
+                        uiComponents.showTooltip(this, content, { delay: 200 });
+                    });
+                    
+                    element.addEventListener('mouseleave', function() {
+                        uiComponents.hideTooltip(this);
+                    });
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>

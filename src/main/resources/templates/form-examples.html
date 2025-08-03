@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/base :: layout(~{::title}, ~{::content}, ~{::scripts})">
+<head>
+    <title>Form Input Examples - Themelyf</title>
+</head>
+<body>
+    <div th:fragment="content" class="px-4 py-6 sm:px-0">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Form Input Examples</h1>
+            <p class="text-gray-600">Comprehensive collection of all HTML input types with enhanced functionality and validation.</p>
+        </div>
+
+        <!-- Basic Input Types -->
+        <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+            <h2 class="text-xl font-semibold mb-6 text-gray-900">Basic Input Types</h2>
+            
+            <form data-validate-form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Text Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Text Input</label>
+                    <input type="text" 
+                           placeholder="Enter text..."
+                           data-validate="required|minLength:2|maxLength:50"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- Email Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Email Input</label>
+                    <input type="email" 
+                           placeholder="user@example.com"
+                           data-validate="required|email"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- Password Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Password Input</label>
+                    <div class="relative">
+                        <input type="password" 
+                               id="password-demo"
+                               placeholder="Password..."
+                               data-validate="required|minLength:8"
+                               class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200 pr-10">
+                        <button type="button" onclick="togglePasswordVisibility('password-demo')" 
+                                class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                            <i class="fas fa-eye text-gray-400 hover:text-gray-600"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Number Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Number Input</label>
+                    <input type="number" 
+                           placeholder="Enter number..."
+                           min="0"
+                           max="100"
+                           step="1"
+                           data-validate="required|number|min:0|max:100"
+                           data-min="0"
+                           data-max="100"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- Tel Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                    <input type="tel" 
+                           placeholder="+1 (555) 123-4567"
+                           data-validate="phone"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- URL Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Website URL</label>
+                    <input type="url" 
+                           placeholder="https://example.com"
+                           data-validate="url"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- Search Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Search Input</label>
+                    <div class="relative">
+                        <input type="search" 
+                               placeholder="Search..."
+                               data-search-input='{"minLength": 2, "delay": 300}'
+                               class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200 pl-10">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hidden Input (for demo) -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Hidden Input</label>
+                    <input type="hidden" value="hidden-value">
+                    <div class="w-full p-3 bg-gray-100 rounded-lg text-sm text-gray-600 border-2 border-dashed border-gray-300">
+                        Hidden input (value: "hidden-value")
+                    </div>
+                </div>
+
+                <!-- Range Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Range Slider</label>
+                    <input type="range" 
+                           min="0" 
+                           max="100" 
+                           value="50"
+                           data-range-slider='{"showValue": true, "showLabels": true}'
+                           class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                </div>
+            </form>
+        </div>
+
+        <!-- Date and Time Inputs -->
+        <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+            <h2 class="text-xl font-semibold mb-6 text-gray-900">Date and Time Inputs</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Date Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Date Input</label>
+                    <input type="date" 
+                           data-datepicker='{"format": "Y-m-d"}'
+                           data-validate="date"
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- Time Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Time Input</label>
+                    <input type="time" 
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- DateTime Local Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">DateTime Local</label>
+                    <input type="datetime-local" 
+                           data-datepicker='{"format": "Y-m-d H:i", "showTime": true}'
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- Month Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Month Input</label>
+                    <input type="month" 
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- Week Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Week Input</label>
+                    <input type="week" 
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- Advanced Date Range -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
+                    <div class="flex space-x-2">
+                        <input type="date" 
+                               placeholder="Start date"
+                               class="flex-1 border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                        <span class="flex items-center text-gray-500">to</span>
+                        <input type="date" 
+                               placeholder="End date"
+                               class="flex-1 border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Selection Inputs -->
+        <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+            <h2 class="text-xl font-semibold mb-6 text-gray-900">Selection Inputs</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Checkbox Group -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Checkbox Group</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="checkbox" value="option1" class="rounded border-gray-300 text-primary-600 focus:ring-primary-500 mr-2">
+                            <span class="text-sm text-gray-700">Option 1</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" value="option2" class="rounded border-gray-300 text-primary-600 focus:ring-primary-500 mr-2">
+                            <span class="text-sm text-gray-700">Option 2</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="checkbox" value="option3" class="rounded border-gray-300 text-primary-600 focus:ring-primary-500 mr-2">
+                            <span class="text-sm text-gray-700">Option 3</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Radio Group -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Radio Group</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="radio-group" value="choice1" class="border-gray-300 text-primary-600 focus:ring-primary-500 mr-2">
+                            <span class="text-sm text-gray-700">Choice 1</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="radio-group" value="choice2" class="border-gray-300 text-primary-600 focus:ring-primary-500 mr-2">
+                            <span class="text-sm text-gray-700">Choice 2</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="radio-group" value="choice3" class="border-gray-300 text-primary-600 focus:ring-primary-500 mr-2">
+                            <span class="text-sm text-gray-700">Choice 3</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Single Select -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Single Select</label>
+                    <select class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                        <option value="">Choose an option...</option>
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                        <option value="option4">Option 4</option>
+                    </select>
+                </div>
+
+                <!-- Multi Select -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Multi Select</label>
+                    <select multiple 
+                            data-multiselect='{"placeholder": "Choose multiple options...", "searchable": true, "maxSelections": 3}'
+                            class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                        <option value="tech">Technology</option>
+                        <option value="design">Design</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="sales">Sales</option>
+                        <option value="support">Support</option>
+                        <option value="hr">Human Resources</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- File and Media Inputs -->
+        <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+            <h2 class="text-xl font-semibold mb-6 text-gray-900">File and Media Inputs</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Single File Upload -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Single File Upload</label>
+                    <input type="file" 
+                           data-file-upload='{"multiple": false, "accept": "*/*", "maxSize": 5242880, "preview": true}'
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- Multiple File Upload -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Multiple File Upload</label>
+                    <input type="file" 
+                           multiple
+                           data-file-upload='{"multiple": true, "accept": "image/*", "maxSize": 5242880, "preview": true, "dragDrop": true}'
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- Image Upload with Preview -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Image Upload</label>
+                    <input type="file" 
+                           accept="image/*"
+                           data-file-upload='{"accept": "image/*", "preview": true, "dragDrop": true}'
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- Document Upload -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Document Upload</label>
+                    <input type="file" 
+                           accept=".pdf,.doc,.docx,.txt"
+                           data-file-upload='{"accept": ".pdf,.doc,.docx,.txt", "preview": true}'
+                           class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Inputs -->
+        <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+            <h2 class="text-xl font-semibold mb-6 text-gray-900">Advanced Inputs</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Color Picker -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Color Picker</label>
+                    <input type="color" 
+                           value="#3B82F6"
+                           data-colorpicker='{"format": "hex", "alpha": false}'
+                           class="w-full h-12 border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                </div>
+
+                <!-- Rich Text Editor -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Rich Text Editor</label>
+                    <textarea data-rich-editor='{"toolbar": ["bold", "italic", "underline", "link", "list"], "height": "150px"}'
+                              class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200">
+                        Start typing here...
+                    </textarea>
+                </div>
+
+                <!-- Tags Input -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Tags Input</label>
+                    <div class="tags-input border border-gray-300 rounded-lg p-2 min-h-[42px] flex flex-wrap gap-1">
+                        <input type="text" 
+                               placeholder="Type and press Enter to add tags..."
+                               class="flex-1 border-none outline-none min-w-[120px]"
+                               onkeypress="addTag(event)">
+                    </div>
+                </div>
+
+                <!-- JSON Editor -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">JSON Editor</label>
+                    <textarea class="w-full h-32 font-mono text-sm border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
+                              placeholder='{"key": "value", "array": [1, 2, 3]}'
+                              data-validate="json"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Textarea Variations -->
+        <div class="bg-white p-6 rounded-xl shadow-lg mb-8">
+            <h2 class="text-xl font-semibold mb-6 text-gray-900">Textarea Variations</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Basic Textarea -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Basic Textarea</label>
+                    <textarea rows="4" 
+                              placeholder="Enter your message..."
+                              data-validate="maxLength:500"
+                              class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"></textarea>
+                    <div class="text-xs text-gray-500 mt-1">Maximum 500 characters</div>
+                </div>
+
+                <!-- Auto-resizing Textarea -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Auto-resizing Textarea</label>
+                    <textarea placeholder="This textarea grows as you type..."
+                              data-autosize="true"
+                              class="w-full border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200 resize-none"></textarea>
+                </div>
+
+                <!-- Code Editor -->
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Code Editor</label>
+                    <textarea class="w-full h-40 font-mono text-sm border-gray-300 rounded-lg shadow-sm focus:ring-primary-500 focus:border-primary-500 transition-colors duration-200"
+                              placeholder="// Enter your code here
+function example() {
+    return 'Hello, World!';
+}"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="bg-white p-6 rounded-xl shadow-lg">
+            <h2 class="text-xl font-semibold mb-6 text-gray-900">Form Actions</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Submit Button -->
+                <button type="submit" 
+                        class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200">
+                    <i class="fas fa-check mr-2"></i>
+                    Submit Form
+                </button>
+
+                <!-- Reset Button -->
+                <button type="reset" 
+                        onclick="resetAllForms()"
+                        class="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200">
+                    <i class="fas fa-undo mr-2"></i>
+                    Reset Form
+                </button>
+
+                <!-- Validate Button -->
+                <button type="button" 
+                        onclick="validateAllForms()"
+                        class="w-full bg-warning-600 hover:bg-warning-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    Validate
+                </button>
+
+                <!-- Clear Button -->
+                <button type="button" 
+                        onclick="clearAllForms()"
+                        class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200">
+                    <i class="fas fa-trash mr-2"></i>
+                    Clear All
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="scripts">
+        <script>
+            function togglePasswordVisibility(inputId) {
+                const input = document.getElementById(inputId);
+                const icon = input.nextElementSibling.querySelector('i');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.className = 'fas fa-eye-slash text-gray-400 hover:text-gray-600';
+                } else {
+                    input.type = 'password';
+                    icon.className = 'fas fa-eye text-gray-400 hover:text-gray-600';
+                }
+            }
+            
+            function addTag(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    const input = event.target;
+                    const value = input.value.trim();
+                    
+                    if (value && !isDuplicateTag(input.parentElement, value)) {
+                        const tag = createTag(value);
+                        input.parentElement.insertBefore(tag, input);
+                        input.value = '';
+                    }
+                }
+            }
+            
+            function isDuplicateTag(container, value) {
+                const existingTags = container.querySelectorAll('.tag');
+                return Array.from(existingTags).some(tag => 
+                    tag.textContent.replace('×', '').trim() === value
+                );
+            }
+            
+            function createTag(text) {
+                const tag = document.createElement('span');
+                tag.className = 'tag inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-800';
+                tag.innerHTML = `
+                    ${text}
+                    <button type="button" onclick="this.parentElement.remove()" class="ml-1 text-primary-600 hover:text-primary-800">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                `;
+                return tag;
+            }
+            
+            function validateAllForms() {
+                const forms = document.querySelectorAll('[data-validate-form]');
+                let allValid = true;
+                
+                forms.forEach(form => {
+                    if (!formValidator.validateForm(form)) {
+                        allValid = false;
+                    }
+                });
+                
+                if (allValid) {
+                    notificationManager.success('Validation Passed', 'All forms are valid!');
+                } else {
+                    notificationManager.error('Validation Failed', 'Please fix the errors and try again.');
+                }
+            }
+            
+            function resetAllForms() {
+                const forms = document.querySelectorAll('form');
+                forms.forEach(form => {
+                    form.reset();
+                    formValidator.clearFormErrors(form);
+                });
+                notificationManager.info('Forms Reset', 'All forms have been reset to their initial state.');
+            }
+            
+            function clearAllForms() {
+                const inputs = document.querySelectorAll('input, textarea, select');
+                inputs.forEach(input => {
+                    if (input.type !== 'radio' && input.type !== 'checkbox') {
+                        input.value = '';
+                    } else {
+                        input.checked = false;
+                    }
+                });
+                
+                // Clear tags
+                document.querySelectorAll('.tag').forEach(tag => tag.remove());
+                
+                // Clear form errors
+                document.querySelectorAll('[data-validate-form]').forEach(form => {
+                    formValidator.clearFormErrors(form);
+                });
+                
+                notificationManager.info('Forms Cleared', 'All form data has been cleared.');
+            }
+            
+            // Setup auto-resize for textareas
+            function setupAutoResize() {
+                document.querySelectorAll('textarea[data-autosize]').forEach(textarea => {
+                    textarea.style.height = 'auto';
+                    textarea.style.height = textarea.scrollHeight + 'px';
+                    
+                    textarea.addEventListener('input', function() {
+                        this.style.height = 'auto';
+                        this.style.height = this.scrollHeight + 'px';
+                    });
+                });
+            }
+            
+            // Custom JSON validator
+            if (window.formValidator) {
+                formValidator.addCustomValidator('json', function(value, element) {
+                    if (!value.trim()) return true; // Allow empty
+                    try {
+                        JSON.parse(value);
+                        return true;
+                    } catch {
+                        return false;
+                    }
+                }, 'Please enter valid JSON');
+            }
+            
+            // Initialize everything
+            document.addEventListener('DOMContentLoaded', function() {
+                setupAutoResize();
+                
+                // Setup live character count for textareas with maxLength
+                document.querySelectorAll('textarea[data-validate*="maxLength"]').forEach(textarea => {
+                    const maxLength = parseInt(textarea.getAttribute('data-validate').match(/maxLength:(\d+)/)?.[1] || 500);
+                    
+                    const counter = document.createElement('div');
+                    counter.className = 'text-xs text-gray-500 mt-1';
+                    counter.textContent = `0 / ${maxLength} characters`;
+                    
+                    textarea.parentNode.appendChild(counter);
+                    
+                    textarea.addEventListener('input', function() {
+                        const length = this.value.length;
+                        counter.textContent = `${length} / ${maxLength} characters`;
+                        counter.className = `text-xs mt-1 ${length > maxLength ? 'text-red-500' : 'text-gray-500'}`;
+                    });
+                });
+                
+                // Setup code syntax highlighting (basic)
+                document.querySelectorAll('textarea[placeholder*="code"]').forEach(textarea => {
+                    textarea.addEventListener('input', function() {
+                        // Basic syntax highlighting could be added here
+                        // For now, just ensure monospace font
+                        this.style.fontFamily = 'Monaco, Menlo, "Ubuntu Mono", monospace';
+                    });
+                });
+            });
+        </script>
+    </div>
+</body>
+</html>

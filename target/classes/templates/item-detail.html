@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="layout/base :: layout(~{::title}, ~{::content}, ~{::scripts})">
+<head>
+    <title th:text="${item.title} + ' - Themelyf Dashboard'">Item Detail - Themelyf Dashboard</title>
+</head>
+<body>
+    <div th:fragment="content" class="px-4 py-6 sm:px-0">
+            <div class="mb-6">
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                        <li class="inline-flex items-center">
+                            <a href="/" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-primary">
+                                <i class="fas fa-home mr-2"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <div class="flex items-center">
+                                <i class="fas fa-chevron-right text-gray-400 mx-2"></i>
+                                <span class="text-sm font-medium text-gray-500" th:text="${item.title}">Item Detail</span>
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="bg-white shadow rounded-lg overflow-hidden">
+                <div class="px-4 py-5 sm:p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h1 class="text-3xl font-bold text-gray-900" th:text="${item.title}">Item Title</h1>
+                            <div class="mt-2 flex items-center space-x-4">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
+                                      th:classappend="${item.category == 'Important' ? 'bg-red-100 text-red-800' : 
+                                                      item.category == 'Project' ? 'bg-blue-100 text-blue-800' : 
+                                                      item.category == 'Task' ? 'bg-green-100 text-green-800' : 
+                                                      'bg-gray-100 text-gray-800'}">
+                                    <i class="fas fa-tag mr-1"></i>
+                                    <span th:text="${item.category}">Category</span>
+                                </span>
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium"
+                                      th:classappend="${item.status == 'Active' ? 'bg-green-100 text-green-800' : 
+                                                      item.status == 'Pending' ? 'bg-yellow-100 text-yellow-800' : 
+                                                      item.status == 'Completed' ? 'bg-blue-100 text-blue-800' : 
+                                                      item.status == 'Inactive' ? 'bg-gray-100 text-gray-800' : 
+                                                      'bg-red-100 text-red-800'}">
+                                    <i class="fas fa-circle mr-1"></i>
+                                    <span th:text="${item.status}">Status</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a th:href="@{/item/{id}/edit(id=${item.id})}" 
+                               class="bg-warning hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                <i class="fas fa-edit mr-2"></i>
+                                Edit
+                            </a>
+                            <button onclick="confirmDelete([[${item.id}]], '[[${item.title}]]')" 
+                                    class="bg-secondary hover:bg-red-700 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                <i class="fas fa-trash mr-2"></i>
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-gray-200 pt-6">
+                        <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+                            <div class="sm:col-span-2">
+                                <dt class="text-sm font-medium text-gray-500">Description</dt>
+                                <dd class="mt-1 text-sm text-gray-900">
+                                    <div th:if="${item.description != null and not #strings.isEmpty(item.description)}" 
+                                         class="whitespace-pre-wrap" th:text="${item.description}">
+                                        Item description will appear here
+                                    </div>
+                                    <div th:if="${item.description == null or #strings.isEmpty(item.description)}" 
+                                         class="text-gray-500 italic">
+                                        No description provided
+                                    </div>
+                                </dd>
+                            </div>
+                            
+                            <div>
+                                <dt class="text-sm font-medium text-gray-500">Category</dt>
+                                <dd class="mt-1 text-sm text-gray-900" th:text="${item.category}">Category</dd>
+                            </div>
+                            
+                            <div>
+                                <dt class="text-sm font-medium text-gray-500">Status</dt>
+                                <dd class="mt-1 text-sm text-gray-900" th:text="${item.status}">Status</dd>
+                            </div>
+                            
+                            <div>
+                                <dt class="text-sm font-medium text-gray-500">Created Date</dt>
+                                <dd class="mt-1 text-sm text-gray-900">
+                                    <i class="fas fa-calendar-plus mr-1 text-gray-400"></i>
+                                    <span th:text="${#temporals.format(item.createdAt, 'MMMM dd, yyyy')}">Created Date</span>
+                                    <span class="text-gray-500 ml-2" th:text="${#temporals.format(item.createdAt, 'HH:mm')}">Time</span>
+                                </dd>
+                            </div>
+                            
+                            <div>
+                                <dt class="text-sm font-medium text-gray-500">Last Updated</dt>
+                                <dd class="mt-1 text-sm text-gray-900">
+                                    <i class="fas fa-calendar-edit mr-1 text-gray-400"></i>
+                                    <span th:text="${#temporals.format(item.updatedAt, 'MMMM dd, yyyy')}">Updated Date</span>
+                                    <span class="text-gray-500 ml-2" th:text="${#temporals.format(item.updatedAt, 'HH:mm')}">Time</span>
+                                </dd>
+                            </div>
+                            
+                            <div>
+                                <dt class="text-sm font-medium text-gray-500">Item ID</dt>
+                                <dd class="mt-1 text-sm text-gray-900 font-mono" th:text="${item.id}">ID</dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <div class="border-t border-gray-200 pt-6 mt-6">
+                        <div class="flex justify-between items-center">
+                            <a href="/" class="text-primary hover:text-blue-700 inline-flex items-center">
+                                <i class="fas fa-arrow-left mr-2"></i>
+                                Back to Dashboard
+                            </a>
+                            <div class="flex space-x-2">
+                                <button onclick="shareItem()" class="text-gray-600 hover:text-gray-800">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
+                                <button onclick="printItem()" class="text-gray-600 hover:text-gray-800">
+                                    <i class="fas fa-print"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirm Delete Modal -->
+        <div id="confirmModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+            <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-1/3 shadow-lg rounded-md bg-white">
+                <div class="mt-3 text-center">
+                    <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+                        <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Confirm Delete</h3>
+                    <p class="text-sm text-gray-500 mb-4">
+                        Are you sure you want to delete "<span id="deleteItemName"></span>"? This action cannot be undone.
+                    </p>
+                    <div class="flex justify-center space-x-3">
+                        <button type="button" onclick="closeConfirmModal()" 
+                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
+                            Cancel
+                        </button>
+                        <form id="deleteForm" method="post" style="display: inline;">
+                            <button type="submit" 
+                                    class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Share Modal -->
+        <div id="shareModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden z-50">
+            <div class="relative top-20 mx-auto p-5 border w-11/12 md:w-1/2 shadow-lg rounded-md bg-white">
+                <div class="mt-3">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-medium text-gray-900">Share Item</h3>
+                        <button onclick="closeShareModal()" class="text-gray-400 hover:text-gray-600">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Share Link</label>
+                            <div class="flex">
+                                <input type="text" readonly th:value="${'http://localhost:8080/item/' + item.id}" 
+                                       id="shareLink" class="flex-1 border-gray-300 rounded-l-md text-sm">
+                                <button onclick="copyLink()" 
+                                        class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-r-md text-sm">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button onclick="shareViaEmail()" 
+                                    class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm">
+                                <i class="fas fa-envelope mr-2"></i> Email
+                            </button>
+                            <button onclick="shareViaSocial()" 
+                                    class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded text-sm">
+                                <i class="fas fa-share mr-2"></i> Social
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:fragment="scripts">
+        <script>
+        function confirmDelete(itemId, itemName) {
+            document.getElementById('deleteItemName').textContent = itemName;
+            document.getElementById('deleteForm').action = '/item/' + itemId + '/delete';
+            document.getElementById('confirmModal').classList.remove('hidden');
+        }
+        
+        function closeConfirmModal() {
+            document.getElementById('confirmModal').classList.add('hidden');
+        }
+        
+        function shareItem() {
+            document.getElementById('shareModal').classList.remove('hidden');
+        }
+        
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.add('hidden');
+        }
+        
+        function copyLink() {
+            const linkInput = document.getElementById('shareLink');
+            linkInput.select();
+            document.execCommand('copy');
+            
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-check"></i>';
+            button.classList.remove('bg-primary', 'hover:bg-blue-700');
+            button.classList.add('bg-green-500');
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.classList.remove('bg-green-500');
+                button.classList.add('bg-primary', 'hover:bg-blue-700');
+            }, 2000);
+        }
+        
+        function shareViaEmail() {
+            const subject = encodeURIComponent('Check out this item: [[${item.title}]]');
+            const body = encodeURIComponent('I wanted to share this item with you: ' + document.getElementById('shareLink').value);
+            window.open(`mailto:?subject=${subject}&body=${body}`);
+        }
+        
+        function shareViaSocial() {
+            const url = encodeURIComponent(document.getElementById('shareLink').value);
+            const text = encodeURIComponent('Check out this item: [[${item.title}]]');
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`);
+        }
+        
+        function printItem() {
+            window.print();
+        }
+        
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('confirmModal')) {
+                closeConfirmModal();
+            }
+            if (event.target == document.getElementById('shareModal')) {
+                closeShareModal();
+            }
+        }
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeConfirmModal();
+                closeShareModal();
+            }
+        });
+        </script>
+        <style>
+            @media print {
+                nav, button, .no-print {
+                    display: none !important;
+                }
+            }
+        </style>
+    </div>
+</body>
+</html>
